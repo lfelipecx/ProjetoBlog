@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 //const mongoose = require('mongoose')
 const app = express()
 const admin = require('./routes/admin')
+const path = require('path')
 
 
 //Configurações
@@ -15,6 +16,9 @@ const admin = require('./routes/admin')
     app.engine('handlebars', handlebars.engine({defaultLayout: 'main'}))
     app.set('view engine', 'handlebars')
     //Mongoose
+
+    //Public
+    app.use(express.static(path.join('public/css')))
 
 //Rotas
     app.use('/admin', admin)
