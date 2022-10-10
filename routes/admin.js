@@ -98,5 +98,18 @@ router.post('/categorias/deletar', (req, res) => {
     })
 })
 
+router.get('/postagens', (req, res) => {
+    res.render('admin/postagens')
+})
+
+router.get('/postagens/add', (req, res) =>{
+    Categoria.find().lean().then((categorias) => {
+        res.render('admin/addpostagem', {categorias: categorias})
+    }).catch((erro) => {
+        req.flash('error_msg', 'Erro ao carregar formulário')
+        res.redirect('/admin')
+    })    
+})
+
 
 module.exports = router
