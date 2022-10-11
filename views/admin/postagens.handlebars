@@ -1,3 +1,29 @@
 <h2>Lista de Postagens</h2>
 <hr>
 <a href="/admin/postagens/add"><button class="btn btn-success">Nova Postagem</button></a>
+
+{{#each postagens}}
+    <div class="card mt-3">
+        <div class="card-body">
+            
+             <div class="d-flex justify-content-between align-items-center">
+                <h4>{{titulo}}</h4>
+                <small><strong>Categoria: </strong>{{categoria.nome}}</small>
+             </div>
+            
+
+            <div class="d-flex gap-2 align-items-center">
+                <strong>Descrição:</strong>
+                <span>{{descricao}}</span>
+            </div>
+            
+            <small><strong>Data: </strong>{{data}}</small><br>
+            
+        </div>
+    </div>
+
+{{else}}
+
+    <p>Nenhuma postagem registrada</p>
+
+{{/each}}
