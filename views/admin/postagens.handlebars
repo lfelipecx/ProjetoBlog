@@ -16,8 +16,17 @@
                 <strong>Descrição:</strong>
                 <span>{{descricao}}</span>
             </div>
+
+             
+            <strong class="mt-3">Conteúdo:</strong>
+            <div><span>{{conteudo}}</span></div>
             
-            <small><strong>Data: </strong>{{data}}</small><br>
+
+             <div class="d-flex justify-content-between align-items-center mt-2">
+                <small><strong>Data: </strong>{{data}}</small><br>
+                <a href="/admin/postagens/edit/{{_id}}"><button class="btn btn-success">Editar</button></a>
+             </div>
+            
             
         </div>
     </div>
