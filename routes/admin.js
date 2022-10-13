@@ -101,7 +101,7 @@ router.post('/categorias/deletar', (req, res) => {
 })
 
 router.get('/postagens', (req, res) => {
-    Postagem.find().lean().populate('categoria').sort({date:'desc'}).then((postagens) =>{
+    Postagem.find().lean().sort({date:'desc'}).populate('categoria').then((postagens) =>{
         res.render('admin/postagens', {postagens: postagens})
     }).catch((erro) => {
         req.flash('error_msg', 'Houve um erro ao carrregar as postagens')
@@ -185,6 +185,16 @@ router.post('/postagem/edit', (req, res) => {
 
     }).catch((erro) => {
         req.flash('error_msg','Houve um erro ao salvar a postagem!')
+        res.redirect('/admin/postagens')
+    })
+})
+
+router.get('/postagens/deletar/:id', (req, res) => {
+    Postagem.remove({_id: req.params.id}).then(() => {
+        req.flash('success_msg', 'Postagem excluída com sucesso!')
+        res.redirect('/admin/postagens')
+    }).catch((erro) => {
+        req.flash('error_msg','Houve um erro ao excluir postagem')
         res.redirect('/admin/postagens')
     })
 })
