@@ -1,16 +1,7 @@
-<div class="bg-light p-5 rounded-lg">
-  <h1 class="display-4">Blog desenvolvido com NodeJS</h1>
-  <p class="lead">Esse aplicativo web foi desenvolvido com NodeJS | Express | MongoDB dentre outras tecnologias</p>
-  <hr class="my-4">
-  <p>Aqui você pode ler sobre as novidades do mundo da tecnologia</p>
-  <a class="btn btn-primary btn-lg" href="#" role="button">Crie uma conta</a>
-</div>
-
-<hr>
-
-<h2>Postagens recentes</h2>
+<h2>Postagens recentes sobre {{categoria.nome}}</h2>
 
 {{#each postagens}}
+
     <div class="card mt-4">
         <div class="card-body">
             <h3>{{titulo}}</h3>
@@ -18,7 +9,6 @@
             <a href="/postagem/{{slug}}"><button class="btn btn-outline-info btn-sm">Saiba Mais</button></a>
             <div class="d-flex justify-content-between align-items-center mt-2">
                 <small><strong>Data de publicação:</strong> {{data}}</small>
-                <small><strong>Categoria:</strong> {{categoria.nome}}</small>
             </div>
         </div>
     </div>

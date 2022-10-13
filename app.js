@@ -10,6 +10,8 @@ const session = require('express-session')
 const flash = require('connect-flash')
 require('./models/Postagem')
 const Postagem = mongoose.model('postagens')
+require('./models/Categoria')
+const Categoria = mongoose.model('categorias')
 
 
 //Configurações
@@ -51,10 +53,6 @@ const Postagem = mongoose.model('postagens')
         })        
     })
 
-    app.get('/404', (req, res) => {
-        res.render('error 404')
-    })
-
     app.get('/postagem/:slug', (req, res) => {
         Postagem.findOne({slug: req.params.slug}).lean().then((postagem) => {
             if(postagem){
@@ -67,6 +65,40 @@ const Postagem = mongoose.model('postagens')
             req.flash('error_msg', 'Houve um erro ao listar postagens')
             res.redirect('/')
         })
+    })
+
+    app.get('/categorias', (req, res) => {
+        Categoria.find().lean().then((categorias) => {
+            res.render('categorias/index', {categorias: categorias})
+        }).catch((erro) => {
+            req.flash('error_msg', 'Erro ao listar categorias')
+            res.redirect('/')
+        })
+    })
+
+    app.get('/categorias/:slug', (req, res) => {
+        Categoria.findOne({slug: req.params.slug}).lean().then((categoria) => {
+            if(categoria){
+
+                Postagem.find({categoria: categoria._id}).lean().then((postagens) =>{
+                    res.render('categorias/postagens', {postagens: postagens, categoria: categoria})
+                }).catch((error) => {
+                    req.flash('error_msg', 'Erro ao listar postagens da categoria')
+                    res.redirect('/categorias')
+                })
+                
+            }else{
+                req.flash('error_msg', 'Erro ao listar postagens da categoria')
+                res.redirect('/categorias')
+            }            
+        }).catch((error) => {
+            req.flash('error_msg', 'Erro ao listar postagens da categoria')
+            res.redirect('/categorias')
+        })
+    })
+
+    app.get('/404', (req, res) => {
+        res.render('error 404')
     })
 
     app.use('/admin', admin)
