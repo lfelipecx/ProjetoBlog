@@ -13,6 +13,7 @@ const Postagem = mongoose.model('postagens')
 require('./models/Categoria')
 const Categoria = mongoose.model('categorias')
 const usuarios = require('./routes/usuario')
+const moment = require('moment')
 
 
 //Configurações
@@ -33,7 +34,14 @@ const usuarios = require('./routes/usuario')
     app.use(bodyParser.urlencoded({extended: true}))
     app.use(bodyParser.json())
     //Handlebars
-    app.engine('handlebars', handlebars.engine({defaultLayout: 'main'}))
+    app.engine('handlebars', handlebars.engine({
+        defaultLayout: 'main',
+        helpers: {
+            formatDate: (date) => {
+                return moment(date).format('DD/MM/YYYY - HH:MM')
+            }
+        }
+    }))
     app.set('view engine', 'handlebars')
     //Mongoose
     mongoose.connect('mongodb://localhost/blogapp').then(() => {
@@ -110,5 +118,5 @@ const usuarios = require('./routes/usuario')
 //Outros
 const PORT = 8081
 app.listen(PORT, ()=>{
-    console.log('Servidor rodando')
+    console.log('Servidor rodando na porta 8081')
 })
