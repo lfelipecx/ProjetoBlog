@@ -15,7 +15,11 @@ const Categoria = mongoose.model('categorias')
 const usuarios = require('./routes/usuario')
 const moment = require('moment')
 const passport = require('passport')
+const eAdmin = require('./helpers/eAdmin')
 require('./config/auth')(passport)
+
+
+
 
 
 //Configurações
@@ -59,7 +63,8 @@ require('./config/auth')(passport)
     app.use(express.static(path.join('public/css')))
 
 //Rotas
-    app.get('/', (req, res) => {
+    app.get('/', (req, res) => {        
+
         Postagem.find().lean().populate('categoria').sort({data: 'desc'}).then((postagens) => {
             res.render('index', {postagens: postagens})
         }).catch((erro) => {

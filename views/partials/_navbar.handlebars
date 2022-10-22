@@ -3,7 +3,7 @@
     <a class="navbar-brand" href="/">BlogApp</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button>   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -13,21 +13,49 @@
           <a class="nav-link" href="/categorias">Categorias</a>
         </li>
 
-        {{#if user}}
+        {{!-- Padrão do menu
+        {{#if user}}            
           <li class="nav-item">
             <a class="nav-link" href="/usuarios/logout">Sair</a>
-          </li>
+          </li> 
+
         {{else}}
           <li class="nav-item">
-            <a class="nav-link" href="/usuarios/login">Login</a>
+              <a class="nav-link" href="/usuarios/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/usuarios/registro">Registro</a>
           </li>
+        {{/if}} --}}
+
+        {{#if user}}            
           <li class="nav-item">
-            <a class="nav-link" href="/usuarios/registro">Registro</a>
+            <a class="nav-link" href="/usuarios/logout">Sair</a>
+          </li>          
+
+                {{#each user}}
+                  <li class="nav-item">
+                    <a class="nav-link">{{nome}}</a>
+                  </li>
+                {{else}}
+                {{/each}}
+
+        {{else}}
+          <li class="nav-item">
+              <a class="nav-link" href="/usuarios/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/usuarios/registro">Registro</a>
           </li>
         {{/if}}
+
         
       </ul>
       
     </div>
   </div>
 </nav>
+
+
+
+
