@@ -1,6 +1,6 @@
 if(process.env.NODE_ENV == 'production'){
     module.exports = {
-        mongoURI: '179.214.14.232/32'        
+        mongoURI: 'mongodb+srv://lfelipecx:lui30589@blogapp.b3i3yzc.mongodb.net/test'        
     }
 }else{
     module.exports = {mongoURI: 'mongodb://localhost/blogapp'}
