@@ -1,9 +1,13 @@
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-  <div class="container-fluid">
+  
+  
+
+  <div class="container-fluid d-flex justify-content-between align-items-center">
     <a class="navbar-brand" href="/">BlogApp</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>   
+    </button>
+      
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -12,33 +16,12 @@
         <li class="nav-item">
           <a class="nav-link" href="/categorias">Categorias</a>
         </li>
-
-        {{!-- Padrão do menu
-        {{#if user}}            
-          <li class="nav-item">
-            <a class="nav-link" href="/usuarios/logout">Sair</a>
-          </li> 
-
-        {{else}}
-          <li class="nav-item">
-              <a class="nav-link" href="/usuarios/login">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/usuarios/registro">Registro</a>
-          </li>
-        {{/if}} --}}
+        
 
         {{#if user}}            
           <li class="nav-item">
             <a class="nav-link" href="/usuarios/logout">Sair</a>
-          </li>          
-
-                {{#each user}}
-                  <li class="nav-item">
-                    <a class="nav-link">{{nome}}</a>
-                  </li>
-                {{else}}
-                {{/each}}
+          </li>  
 
         {{else}}
           <li class="nav-item">
@@ -53,7 +36,40 @@
       </ul>
       
     </div>
-  </div>
+
+      <div class="" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            {{#if user}}
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Bem vindo!</a>
+                    </li> 
+
+                  {{#each user}}                                     
+                    <li class="nav-item">
+                      <a class="nav-link">{{nome}}</a>
+                    </li>
+                  {{else}}
+                  {{/each}}
+
+                  {{#if admin}}
+                      <li class="nav-item">
+                        <a class="nav-link" href="/admin/postagens">Postagens</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/admin/categorias">Categorias</a>
+                      </li>
+                  {{else}}
+                  {{/if}}
+
+            {{else}}
+            {{/if}}
+        </ul>
+      </div>
+
+    </div> 
+
+
+  
 </nav>
 
 
