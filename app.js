@@ -15,8 +15,10 @@ const Categoria = mongoose.model('categorias')
 const usuarios = require('./routes/usuario')
 const moment = require('moment')
 const passport = require('passport')
-const eAdmin = require('./helpers/eAdmin')
 require('./config/auth')(passport)
+const db = require('./config/db')
+//const {eAdmin} = require('./helpers/eAdmin')
+
 
 
 
@@ -38,7 +40,7 @@ require('./config/auth')(passport)
         res.locals.error_msg = req.flash('error_msg')
         res.locals.error = req.flash('error')
         res.locals.user = req.user || null
-        res.locals.admin = eAdmin || null
+        //res.locals.admin = eAdmin || null
         next()
     })
     //Body-parser
@@ -55,7 +57,7 @@ require('./config/auth')(passport)
     }))
     app.set('view engine', 'handlebars')
     //Mongoose
-    mongoose.connect('mongodb://localhost/blogapp').then(() => {
+    mongoose.connect(db.mongoURI).then(() => {
         console.log('MongoDB conectado com sucesso')
     }).catch((erro) => {
         console.log("Falha ao conectar o MongoDB. " + erro)
@@ -128,7 +130,7 @@ require('./config/auth')(passport)
 
 
 //Outros
-const PORT = 8081
+const PORT = process.env.PORT || 8081
 app.listen(PORT, ()=>{
     console.log('Servidor rodando na porta 8081')
 })
