@@ -57,7 +57,7 @@ const db = require('./config/db')
     }))
     app.set('view engine', 'handlebars')
     //Mongoose
-    mongoose.connect(db.mongoURI).then(() => {
+    mongoose.connect(process.env.MONGODB_URL).then(() => {
         console.log('MongoDB conectado com sucesso')
     }).catch((erro) => {
         console.log("Falha ao conectar o MongoDB. " + erro)
